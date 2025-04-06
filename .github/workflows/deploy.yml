@@ -28,9 +28,12 @@ jobs:
         run: npm run build
         env:
           CI: false
+          VITE_BASE_URL: /widgets
 
       - name: Create .nojekyll file
-        run: touch dist/.nojekyll
+        run: |
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
