@@ -34,7 +34,10 @@ jobs:
         run: |
           touch dist/.nojekyll
           cp dist/index.html dist/404.html
-          cp dist/index.html dist/widgets/index.html
+          mkdir -p dist/widgets
+          cp -r dist/* dist/widgets/ || true
+          mv dist/widgets/widgets/* dist/widgets/ || true
+          rm -rf dist/widgets/widgets || true
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

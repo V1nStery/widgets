@@ -20,8 +20,8 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html'),
       },
       output: {
-        entryFileNames: '[name].[hash].js',
-        chunkFileNames: '[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
         assetFileNames: ({ name }) => {
           if (!name) return 'assets/[name].[hash][extname]';
           const ext = name.split('.').pop();
