@@ -1,0 +1,53 @@
+/* Переопределяем стандартные стили react-resizable */
+.react-resizable .react-resizable-handle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+  background-image: none !important;
+  transform: none !important;
+  cursor: se-resize;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+/* Создаем угловую линию с более толстыми границами */
+.react-resizable .react-resizable-handle::after {
+  content: '';
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 20px;
+  height: 20px;
+  border-right: 3px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+  background: transparent;
+  box-sizing: border-box;
+  border-bottom-right-radius: 15px;
+}
+
+/* Убираем стандартную иконку */
+.react-resizable-handle.react-resizable-handle-se {
+  background-image: none !important;
+}
+
+/* Эффект при наведении */
+.react-resizable-handle:hover::after {
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Делаем маркеры более заметными в режиме перемещения */
+.moving-mode .react-resizable .react-resizable-handle {
+  opacity: 1;
+}
+
+.moving-mode .react-resizable .react-resizable-handle::after {
+  border-right: 4px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.4);
+}
+
+.moving-mode .react-resizable-handle:hover::after {
+  border-color: rgba(0, 0, 0, 0.7);
+} 
