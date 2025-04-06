@@ -30,10 +30,11 @@ jobs:
           CI: false
           VITE_BASE_URL: /widgets
 
-      - name: Create .nojekyll file
+      - name: Prepare for deployment
         run: |
           touch dist/.nojekyll
           cp dist/index.html dist/404.html
+          cp dist/index.html dist/widgets/index.html
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

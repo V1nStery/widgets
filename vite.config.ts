@@ -13,26 +13,25 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    assetsDir: '',
+    assetsDir: 'assets',
     sourcemap: true,
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
       },
       output: {
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: (assetInfo) => {
-          if (!assetInfo.name) return 'assets/[name].[hash][extname]';
-          const info = assetInfo.name.split('.');
-          const extType = info[info.length - 1];
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/images/[name].[hash][extname]`;
+        entryFileNames: '[name].[hash].js',
+        chunkFileNames: '[name].[hash].js',
+        assetFileNames: ({ name }) => {
+          if (!name) return 'assets/[name].[hash][extname]';
+          const ext = name.split('.').pop();
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext || '')) {
+            return 'assets/images/[name].[hash][extname]';
           }
-          if (/css/i.test(extType)) {
-            return `assets/css/[name].[hash][extname]`;
+          if (ext === 'css') {
+            return 'assets/css/[name].[hash][extname]';
           }
-          return `assets/[name].[hash][extname]`;
+          return 'assets/[name].[hash][extname]';
         },
       },
     },
