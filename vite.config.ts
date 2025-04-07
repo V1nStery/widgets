@@ -20,18 +20,17 @@ export default defineConfig({
         main: path.resolve(__dirname, 'index.html'),
       },
       output: {
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: ({ name }) => {
-          if (!name) return 'assets/[name].[hash][extname]';
-          const ext = name.split('.').pop();
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext || '')) {
-            return 'assets/images/[name].[hash][extname]';
+        entryFileNames: 'assets/[name].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: ({ name, type }) => {
+          if (type === 'asset') {
+            if (!name) return 'assets/[name]-[hash][extname]';
+            if (name.endsWith('.css')) return 'assets/[name]-[hash][extname]';
+            if (/\.(png|jpe?g|gif|svg|ico|webp)$/.test(name)) {
+              return 'assets/images/[name]-[hash][extname]';
+            }
           }
-          if (ext === 'css') {
-            return 'assets/css/[name].[hash][extname]';
-          }
-          return 'assets/[name].[hash][extname]';
+          return 'assets/[name]-[hash][extname]';
         },
       },
     },

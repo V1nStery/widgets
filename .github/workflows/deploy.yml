@@ -32,12 +32,14 @@ jobs:
 
       - name: Prepare for deployment
         run: |
-          touch dist/.nojekyll
-          cp dist/index.html dist/404.html
-          mkdir -p dist/widgets
-          cp -r dist/* dist/widgets/ || true
-          mv dist/widgets/widgets/* dist/widgets/ || true
-          rm -rf dist/widgets/widgets || true
+          cd dist
+          touch .nojekyll
+          cp index.html 404.html
+          mkdir -p widgets/assets
+          cp -r assets/* widgets/assets/
+          cp index.html widgets/
+          cp 404.html widgets/
+          cp .nojekyll widgets/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
